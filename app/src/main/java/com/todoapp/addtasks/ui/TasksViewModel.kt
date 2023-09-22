@@ -1,4 +1,7 @@
 package com.todoapp.addtasks.ui;
 
-//class TasksViewModel :ViewModel(){
-//        }
+import androidx.lifecycle.ViewModel
+import javax.inject.Inject
+
+class TasksViewModel @Inject constructor() :ViewModel() {
+}
