@@ -126,7 +126,7 @@ fun ItemTask(taskModel: TaskModel, tasksViewModel: TasksViewModel) {
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
             .pointerInput(Unit) {
-                detectTapGestures(onLongPress = { tasksViewModel.onItemremove(taskModel) })
+                detectTapGestures(onLongPress = { tasksViewModel.onItemRemove(taskModel) })
             }
     ) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically)

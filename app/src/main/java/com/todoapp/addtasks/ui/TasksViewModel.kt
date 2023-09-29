@@ -7,7 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.todoapp.addtasks.domain.AddTaskUseCase
+import com.todoapp.addtasks.domain.DeleteTaskUseCase
 import com.todoapp.addtasks.domain.GetTasksUseCase
+import com.todoapp.addtasks.domain.UpdateTaskUseCase
 import com.todoapp.addtasks.ui.TasksUiState.*
 import com.todoapp.addtasks.ui.model.TaskModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class TasksViewModel @Inject constructor(
     private val addTaskUseCase: AddTaskUseCase,
+    private val updateTaskUseCase: UpdateTaskUseCase,
+    private val deleteTaskUseCase: DeleteTaskUseCase,
     getTasksUseCase: GetTasksUseCase
 ) : ViewModel() {
 
@@ -53,11 +57,13 @@ class TasksViewModel @Inject constructor(
 //        _tasks[index] = _tasks[index].let {
 //            it.copy(selected = !it.selected)
 //        }
+        viewModelScope.launch {
+            updateTaskUseCase(taskModel.copy(selected = !taskModel.selected))
+        }
     }
 
-    fun onItemremove(taskModel: TaskModel) {
-//        val task = _tasks.find { it.id == taskModel.id }
-//        _tasks.remove(task)
+    fun onItemRemove(taskModel: TaskModel) {
+        viewModelScope.launch { deleteTaskUseCase(taskModel) }
     }
 
 }
